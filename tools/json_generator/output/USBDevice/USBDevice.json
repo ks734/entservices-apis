@@ -197,12 +197,7 @@
                 "required": ["deviceName"]
             },
             "result": {
-                "type": "object",
-                "properties": {
-                    "deviceInfo": {
                         "$ref": "#/definitions/USBDeviceInfoList"
-                    }
-                }
             },
             "errors": [
                 {
@@ -266,23 +261,13 @@
         "onDevicePluggedIn": {
             "summary": "Device Plugged in notification",
             "params": {
-                "type": "object",
-                "properties": {
-                    "device": {
                         "$ref": "#/definitions/USBDevice"
-                    }
-                }
             }
         },
         "onDevicePluggedOut": {
             "summary": "Device Plugged out notification",
             "params": {
-                "type": "object",
-                "properties": {
-                    "device": {
                         "$ref": "#/definitions/USBDevice"
-                    }
-                }
             }
         }
     }
