@@ -1,5 +1,5 @@
 <!-- Generated automatically, DO NOT EDIT! -->
-<a name="USBMassStorage_Plugin"></a>
+<a name="head.USBMassStorage_Plugin"></a>
 # USBMassStorage Plugin
 
 **Version: [1.0.0]()**
@@ -8,25 +8,25 @@ A org.rdk.UsbMassStorage plugin for Thunder framework.
 
 ### Table of Contents
 
-- [Abbreviation, Acronyms and Terms](#Abbreviation,_Acronyms_and_Terms)
-- [Description](#Description)
-- [Configuration](#Configuration)
-- [Methods](#Methods)
-- [Notifications](#Notifications)
+- [Abbreviation, Acronyms and Terms](#head.Abbreviation,_Acronyms_and_Terms)
+- [Description](#head.Description)
+- [Configuration](#head.Configuration)
+- [Methods](#head.Methods)
+- [Notifications](#head.Notifications)
 
-<a name="Abbreviation,_Acronyms_and_Terms"></a>
+<a name="head.Abbreviation,_Acronyms_and_Terms"></a>
 # Abbreviation, Acronyms and Terms
 
 [[Refer to this link](overview/aat.md)]
 
-<a name="Description"></a>
+<a name="head.Description"></a>
 # Description
 
 The `USBMassStorage` plugin is using For mounting the file system on mass storage and enumeration of mount points.
 
-The plugin is designed to be loaded and executed within the Thunder framework. For more information about the framework refer to [[Thunder](#Thunder)].
+The plugin is designed to be loaded and executed within the Thunder framework. For more information about the framework refer to [[Thunder](#ref.Thunder)].
 
-<a name="Configuration"></a>
+<a name="head.Configuration"></a>
 # Configuration
 
 The table below lists configuration options of the plugin.
@@ -38,7 +38,7 @@ The table below lists configuration options of the plugin.
 | locator | string | Library name: *libWPEFrameworkUSBMassStorage.so* |
 | autostart | boolean | Determines if the plugin shall be started automatically along with the framework |
 
-<a name="Methods"></a>
+<a name="head.Methods"></a>
 # Methods
 
 The following methods are provided by the org.rdk.UsbMassStorage plugin:
@@ -47,13 +47,13 @@ org.rdk.UsbMassStorage interface methods:
 
 | Method | Description |
 | :-------- | :-------- |
-| [getDeviceList](#getDeviceList) | Retrieve the list of connected USB storage devices |
-| [getMountPoints](#getMountPoints) | Retrieve the mount info list by given USB storage device name |
-| [getPartitionInfo](#getPartitionInfo) | Get the partition information for the given mount path |
+| [getDeviceList](#method.getDeviceList) | Retrieve the list of connected USB storage devices |
+| [getMountPoints](#method.getMountPoints) | Retrieve the mount info list by given USB storage device name |
+| [getPartitionInfo](#method.getPartitionInfo) | Get the partition information for the given mount path |
 
 
-<a name="getDeviceList"></a>
-## *getDeviceList*
+<a name="method.getDeviceList"></a>
+## *getDeviceList [<sup>method</sup>](#head.Methods)*
 
 Retrieve the list of connected USB storage devices.
 
@@ -70,9 +70,9 @@ This method takes no parameters.
 | Name | Type | Description |
 | :-------- | :-------- | :-------- |
 | result | array | On success, a list of USB storage devices will be returned |
-| result[#] | array | Information about a connected USB storage device |
-| devicePath | string | <sup>*(optional)*</sup> The path to the USB storage device in the system |
-| deviceName | string | <sup>*(optional)*</sup> The name of the USB storage device |
+| result[#] | object | Information about a USB storage device |
+| result[#]?.devicePath | string | <sup>*(optional)*</sup> The path to the USB device |
+| result[#]?.deviceName | string | <sup>*(optional)*</sup> The name of the USB device |
 
 ### Example
 
@@ -93,18 +93,16 @@ This method takes no parameters.
     "jsonrpc": "2.0",
     "id": 42,
     "result": [
-        [
-            {
-                "devicePath": "/dev/sda1",
-                "deviceName": "USB Drive 1"
-            }
-        ]
+        {
+            "devicePath": "/dev/sda",
+            "deviceName": "001/006"
+        }
     ]
 }
 ```
 
-<a name="getMountPoints"></a>
-## *getMountPoints*
+<a name="method.getMountPoints"></a>
+## *getMountPoints [<sup>method</sup>](#head.Methods)*
 
 Retrieve the mount info list by given USB storage device name.
 
@@ -124,10 +122,10 @@ No Events
 | Name | Type | Description |
 | :-------- | :-------- | :-------- |
 | result | array | On success, mount info list of a USB storage device will be returned |
-| result[#] | array |  |
-| partitionName | string | The name of the partition being mounted |
-| mountFlags | string | Flags indicating how the partition is mounted |
-| mountPath | string | The mount point path in the file system |
+| result[#] | object |  |
+| result[#].partitionName | string | The name of the partition being mounted |
+| result[#].mountFlags | string | Flags indicating how the partition is mounted |
+| result[#].mountPath | string | The mount point path in the file system |
 
 ### Example
 
@@ -151,19 +149,17 @@ No Events
     "jsonrpc": "2.0",
     "id": 42,
     "result": [
-        [
-            {
-                "partitionName": "/dev/sda1",
-                "mountFlags": "READ_ONLY",
-                "mountPath": "/mnt/usb1"
-            }
-        ]
+        {
+            "partitionName": "/dev/sda1",
+            "mountFlags": "READ_ONLY",
+            "mountPath": "/mnt/usb1"
+        }
     ]
 }
 ```
 
-<a name="getPartitionInfo"></a>
-## *getPartitionInfo*
+<a name="method.getPartitionInfo"></a>
+## *getPartitionInfo [<sup>method</sup>](#head.Methods)*
 
 Get the partition information for the given mount path.
 
@@ -229,10 +225,10 @@ No Events
 }
 ```
 
-<a name="Notifications"></a>
+<a name="head.Notifications"></a>
 # Notifications
 
-Notifications are autonomous events, triggered by the internals of the implementation, and broadcasted via JSON-RPC to all registered observers. Refer to [[Thunder](#Thunder)] for information on how to register for a notification.
+Notifications are autonomous events, triggered by the internals of the implementation, and broadcasted via JSON-RPC to all registered observers. Refer to [[Thunder](#ref.Thunder)] for information on how to register for a notification.
 
 The following events are provided by the org.rdk.UsbMassStorage plugin:
 
@@ -240,12 +236,12 @@ org.rdk.UsbMassStorage interface events:
 
 | Event | Description |
 | :-------- | :-------- |
-| [onDeviceMounted](#onDeviceMounted) | Triggered after the device partitions are mounted |
-| [onDeviceUnmounted](#onDeviceUnmounted) | Triggered after the device partitions are unmounted |
+| [onDeviceMounted](#event.onDeviceMounted) | Triggered after the device partitions are mounted |
+| [onDeviceUnmounted](#event.onDeviceUnmounted) | Triggered after the device partitions are unmounted |
 
 
-<a name="onDeviceMounted"></a>
-## *onDeviceMounted*
+<a name="event.onDeviceMounted"></a>
+## *onDeviceMounted [<sup>event</sup>](#head.Notifications)*
 
 Triggered after the device partitions are mounted.
 
@@ -255,10 +251,10 @@ Triggered after the device partitions are mounted.
 | :-------- | :-------- | :-------- |
 | params | object |  |
 | params.deviceList | array | mount info list of a USB storage device will be returned |
-| params.deviceList[#] | array |  |
-| partitionName | string | The name of the partition being mounted |
-| mountFlags | string | Flags indicating how the partition is mounted |
-| mountPath | string | The mount point path in the file system |
+| params.deviceList[#] | object |  |
+| params.deviceList[#].partitionName | string | The name of the partition being mounted |
+| params.deviceList[#].mountFlags | string | Flags indicating how the partition is mounted |
+| params.deviceList[#].mountPath | string | The mount point path in the file system |
 
 ### Example
 
@@ -268,20 +264,18 @@ Triggered after the device partitions are mounted.
     "method": "client.events.onDeviceMounted",
     "params": {
         "deviceList": [
-            [
-                {
-                    "partitionName": "/dev/sda1",
-                    "mountFlags": "READ_ONLY",
-                    "mountPath": "/mnt/usb1"
-                }
-            ]
+            {
+                "partitionName": "/dev/sda1",
+                "mountFlags": "READ_ONLY",
+                "mountPath": "/mnt/usb1"
+            }
         ]
     }
 }
 ```
 
-<a name="onDeviceUnmounted"></a>
-## *onDeviceUnmounted*
+<a name="event.onDeviceUnmounted"></a>
+## *onDeviceUnmounted [<sup>event</sup>](#head.Notifications)*
 
 Triggered after the device partitions are unmounted.
 
@@ -291,10 +285,10 @@ Triggered after the device partitions are unmounted.
 | :-------- | :-------- | :-------- |
 | params | object |  |
 | params.deviceList | array | mount info list of a USB storage device will be returned |
-| params.deviceList[#] | array |  |
-| partitionName | string | The name of the partition being mounted |
-| mountFlags | string | Flags indicating how the partition is mounted |
-| mountPath | string | The mount point path in the file system |
+| params.deviceList[#] | object |  |
+| params.deviceList[#].partitionName | string | The name of the partition being mounted |
+| params.deviceList[#].mountFlags | string | Flags indicating how the partition is mounted |
+| params.deviceList[#].mountPath | string | The mount point path in the file system |
 
 ### Example
 
@@ -304,13 +298,11 @@ Triggered after the device partitions are unmounted.
     "method": "client.events.onDeviceUnmounted",
     "params": {
         "deviceList": [
-            [
-                {
-                    "partitionName": "/dev/sda1",
-                    "mountFlags": "READ_ONLY",
-                    "mountPath": "/mnt/usb1"
-                }
-            ]
+            {
+                "partitionName": "/dev/sda1",
+                "mountFlags": "READ_ONLY",
+                "mountPath": "/mnt/usb1"
+            }
         ]
     }
 }

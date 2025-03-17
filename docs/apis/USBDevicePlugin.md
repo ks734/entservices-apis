@@ -1,5 +1,5 @@
 <!-- Generated automatically, DO NOT EDIT! -->
-<a name="USBDevice_Plugin"></a>
+<a name="head.USBDevice_Plugin"></a>
 # USBDevice Plugin
 
 **Version: [1.0.0]()**
@@ -8,25 +8,25 @@ A org.rdk.UsbDevice plugin for Thunder framework.
 
 ### Table of Contents
 
-- [Abbreviation, Acronyms and Terms](#Abbreviation,_Acronyms_and_Terms)
-- [Description](#Description)
-- [Configuration](#Configuration)
-- [Methods](#Methods)
-- [Notifications](#Notifications)
+- [Abbreviation, Acronyms and Terms](#head.Abbreviation,_Acronyms_and_Terms)
+- [Description](#head.Description)
+- [Configuration](#head.Configuration)
+- [Methods](#head.Methods)
+- [Notifications](#head.Notifications)
 
-<a name="Abbreviation,_Acronyms_and_Terms"></a>
+<a name="head.Abbreviation,_Acronyms_and_Terms"></a>
 # Abbreviation, Acronyms and Terms
 
 [[Refer to this link](overview/aat.md)]
 
-<a name="Description"></a>
+<a name="head.Description"></a>
 # Description
 
 The `USBDevice`Plugin is responsible for notifying and providing information about USB devices attached to the host system.
 
-The plugin is designed to be loaded and executed within the Thunder framework. For more information about the framework refer to [[Thunder](#Thunder)].
+The plugin is designed to be loaded and executed within the Thunder framework. For more information about the framework refer to [[Thunder](#ref.Thunder)].
 
-<a name="Configuration"></a>
+<a name="head.Configuration"></a>
 # Configuration
 
 The table below lists configuration options of the plugin.
@@ -38,7 +38,7 @@ The table below lists configuration options of the plugin.
 | locator | string | Library name: *libWPEFrameworkUSBDevice.so* |
 | autostart | boolean | Determines if the plugin shall be started automatically along with the framework |
 
-<a name="Methods"></a>
+<a name="head.Methods"></a>
 # Methods
 
 The following methods are provided by the org.rdk.UsbDevice plugin:
@@ -47,14 +47,14 @@ org.rdk.UsbDevice interface methods:
 
 | Method | Description |
 | :-------- | :-------- |
-| [getDeviceList](#getDeviceList) | Gets the device information of the connected USB Devices |
-| [getDeviceInfo](#getDeviceInfo) | Gets detailed device information for the given device name |
-| [bindDriver](#bindDriver) | Binds the respective driver for the device |
-| [unbindDriver](#unbindDriver) | Unbinds the respective driver for the device |
+| [getDeviceList](#method.getDeviceList) | Gets the device information of the connected USB Devices |
+| [getDeviceInfo](#method.getDeviceInfo) | Gets detailed device information for the given device name |
+| [bindDriver](#method.bindDriver) | Binds the respective driver for the device |
+| [unbindDriver](#method.unbindDriver) | Unbinds the respective driver for the device |
 
 
-<a name="getDeviceList"></a>
-## *getDeviceList*
+<a name="method.getDeviceList"></a>
+## *getDeviceList [<sup>method</sup>](#head.Methods)*
 
 Gets the device information of the connected USB Devices.
 
@@ -64,21 +64,18 @@ No Events
 
 ### Parameters
 
-| Name | Type | Description |
-| :-------- | :-------- | :-------- |
-| params | object |  |
+This method takes no parameters.
 
 ### Result
 
 | Name | Type | Description |
 | :-------- | :-------- | :-------- |
-| result | object |  |
-| result.devices | array | An array of USBDevice |
-| result.devices[#] | object |  |
-| result.devices[#].deviceClass | integer | USB class of the device |
-| result.devices[#].deviceSubclass | integer | USB Sub class of the device |
-| result.devices[#].deviceName | string | Name of the USB device |
-| result.devices[#].devicePath | string | The path to be used for the USB device |
+| result | array |  |
+| result[#] | object |  |
+| result[#].deviceClass | integer | USB class of the device |
+| result[#].deviceSubclass | integer | USB Sub class of the device |
+| result[#].deviceName | string | Name of the USB device |
+| result[#].devicePath | string | The path to be used for the USB device |
 
 ### Errors
 
@@ -94,8 +91,7 @@ No Events
 {
     "jsonrpc": "2.0",
     "id": 42,
-    "method": "org.rdk.UsbDevice.getDeviceList",
-    "params": {}
+    "method": "org.rdk.UsbDevice.getDeviceList"
 }
 ```
 
@@ -105,21 +101,19 @@ No Events
 {
     "jsonrpc": "2.0",
     "id": 42,
-    "result": {
-        "devices": [
-            {
-                "deviceClass": 8,
-                "deviceSubclass": 6,
-                "deviceName": "001/003",
-                "devicePath": "/dev/sdb"
-            }
-        ]
-    }
+    "result": [
+        {
+            "deviceClass": 8,
+            "deviceSubclass": 6,
+            "deviceName": "001/003",
+            "devicePath": "/dev/sdb"
+        }
+    ]
 }
 ```
 
-<a name="getDeviceInfo"></a>
-## *getDeviceInfo*
+<a name="method.getDeviceInfo"></a>
+## *getDeviceInfo [<sup>method</sup>](#head.Methods)*
 
 Gets detailed device information for the given device name.
 
@@ -257,8 +251,8 @@ No Events
 }
 ```
 
-<a name="bindDriver"></a>
-## *bindDriver*
+<a name="method.bindDriver"></a>
+## *bindDriver [<sup>method</sup>](#head.Methods)*
 
 Binds the respective driver for the device.
 
@@ -310,8 +304,8 @@ No Events
 }
 ```
 
-<a name="unbindDriver"></a>
-## *unbindDriver*
+<a name="method.unbindDriver"></a>
+## *unbindDriver [<sup>method</sup>](#head.Methods)*
 
 Unbinds the respective driver for the device.
 
@@ -363,10 +357,10 @@ No Events
 }
 ```
 
-<a name="Notifications"></a>
+<a name="head.Notifications"></a>
 # Notifications
 
-Notifications are autonomous events, triggered by the internals of the implementation, and broadcasted via JSON-RPC to all registered observers. Refer to [[Thunder](#Thunder)] for information on how to register for a notification.
+Notifications are autonomous events, triggered by the internals of the implementation, and broadcasted via JSON-RPC to all registered observers. Refer to [[Thunder](#ref.Thunder)] for information on how to register for a notification.
 
 The following events are provided by the org.rdk.UsbDevice plugin:
 
@@ -374,12 +368,12 @@ org.rdk.UsbDevice interface events:
 
 | Event | Description |
 | :-------- | :-------- |
-| [onDevicePluggedIn](#onDevicePluggedIn) | Device Plugged in notification |
-| [onDevicePluggedOut](#onDevicePluggedOut) | Device Plugged out notification |
+| [onDevicePluggedIn](#event.onDevicePluggedIn) | Device Plugged in notification |
+| [onDevicePluggedOut](#event.onDevicePluggedOut) | Device Plugged out notification |
 
 
-<a name="onDevicePluggedIn"></a>
-## *onDevicePluggedIn*
+<a name="event.onDevicePluggedIn"></a>
+## *onDevicePluggedIn [<sup>event</sup>](#head.Notifications)*
 
 Device Plugged in notification.
 
@@ -411,8 +405,8 @@ Device Plugged in notification.
 }
 ```
 
-<a name="onDevicePluggedOut"></a>
-## *onDevicePluggedOut*
+<a name="event.onDevicePluggedOut"></a>
+## *onDevicePluggedOut [<sup>event</sup>](#head.Notifications)*
 
 Device Plugged out notification.
 
